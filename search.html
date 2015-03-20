@@ -1,0 +1,45 @@
+<ion-view>
+
+<ion-nav-bar class="navbar" align-title="center">
+	<ion-nav-back-button class="button-clear">
+		<i class="ion-arrow-left-b" style="color:#fff;"> Location Search</i> 
+    </ion-nav-back-button>
+	
+
+	<ion-nav-buttons side="right">
+		<button class="button-clear" ng-click="toHome()">
+			<i class="ion-home icon-header" style="font-size:20px"></i>
+		</button>
+		<button class="button-clear">
+			<i class="ion-star icon-header" style="font-size:20px"></i>
+		</button>
+	</ion-nav-buttons>
+</ion-nav-bar>
+
+
+<ion-content style="background-size:cover">
+	
+	<span style='font-weight:bold;font-size:18px;font-family:Helvetica,Arial;float:left;margin:10px 10px' ng-repeat="restoCount in restoCounts"> {{restoCount.count}} restaurants available</span>
+
+	<div style="float:left;margin-top:15px">
+		<div class="search_item_new" ng-repeat="restoInfo in restoInfos">
+			<a ng-href="#/restaurant/{{restoInfo.restaurant_id}}">
+			<div class="search_item_l">
+				<div class="helper" style="background-image:url(http://117.102.249.127/inc/upload/{{restoInfo.top_menu_image}})"></div>
+			</div>
+			<div class="search_item_r">
+				<span style="color:black;font-size:16px;font-weight:bold">{{restoInfo.restaurant_firstname}}</span><br>
+				<span style="color:#555052;font-size:13px;font-weight:bold;" ng-if="restoInfo.restaurant_lastname">@ {{restoInfo.restaurant_lastname}}</span>
+				<div style="margin-top:5px;line-height:16px;float:left;width:100%;font-size:13px;color:black">
+					<rating ng-model="restoInfo.rating" max="max"></rating>
+				<span style="font-weight:700;" ng-repeat="foodtype in restoInfo.foodtype_name">
+					<span ng-if="!$last">{{foodtype}},</span><span ng-if="$last">{{foodtype}}.</span>
+				</span><br/>{{restoInfo.time}}</span>
+				</div>
+			</div>
+			</a>
+		</div>
+	</div>
+</ion-content>
+
+</ion-view>

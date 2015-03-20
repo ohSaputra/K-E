@@ -1,0 +1,141 @@
+<ion-view title="<a href='#/'>New Address</a>">
+
+<ion-nav-bar class="navbar">
+	<ion-nav-back-button class="button-clear" style="color:#bc1e2d;margin-top:-5px">
+		<i class="ion-arrow-left-b" style="color:#fff;vertical-align:40%"></i> 
+		<img alt="Brand" src="img/Klik-Eat-Logo-White.png" id="brand" class="header-logo"/>
+    </ion-nav-back-button>
+
+</ion-nav-bar>
+
+
+	<ion-content style="background-color:#eee">
+		<div class="list list-inset">
+			<div class="item item-icon-right" ng-repeat="item in newAddress" ng-click="openModal(item.index)">
+				{{item.text}} <i class="icon ion-ios7-checkmark-outline" ng-hide="item.checked"></i> <i class="icon ion-ios7-checkmark" ng-show="item.checked"></i>
+			</div>
+		</div>
+
+		<div class="padding">
+			<div class="button-bar">
+				<button class="button button-balanced" ng-click="commitAddress()" ng-disabled="newAddress[0].checked == false || newAddress[1].checked == false || newAddress[2].checked == false">
+					Save Address
+				</button>
+			</div>
+		</div>
+	</ion-content>
+
+</ion-view>
+
+
+<script id="newaddress-template.html" type="text/ng-template">
+	<ion-modal-view>
+		<ion-header-bar class="bar">
+			<div class="buttons">
+				<button class="button" ng-click="closeModal()">Cancel</button>
+			</div>
+			<h1 class="title" ng-show="tab == 1">Create New Address</h1>
+			<h1 class="title" ng-show="tab == 2">Directions</h1>
+			<div class="buttons">
+				<button class="button" ng-click="saveAddress(addressInput)">Save</button>
+			</div>
+		</ion-header-bar>
+
+		<ion-content>
+			<div ng-show="tab == 2">
+				<div class="list">
+		                <label class="item item-input">
+		        	       <textarea ng-model="addressInput.patokan" style="height:100px" placeholder="Special Instructions"></textarea>
+		                </label>
+		        </div>
+			</div>
+
+			<div ng-if="tab==1">
+				<div class="list list-inset" ng-switch on="addr.address_type">
+					<label class="item item-input item-select">
+					    <div class="input-label">
+					      Tipe Alamat
+					    </div>
+						<select ng-model="addressInput.address_selection">
+							<option value="1">Office</option>					
+							<option value="2">Residence</option>		
+							<option value="3">Apartment</option>					
+							<option value="4">Hotel</option>	
+							<option value="5">Ruko/Rukan</option>						
+							<option value="6">Kost</option>						
+						</select>
+					</label>
+					<addrType ng-switch on="addressInput.address_selection">
+						<div ng-switch-when="1">
+							<label class="item item-input">
+							    <input type="text" placeholder="Nama Perusahaan" ng-model="addressInput.tower_division" >
+							</label>
+							<label class="item item-input">
+							    <input type="text" placeholder="Nama Gedung" ng-model="addressInput.address_name">
+							</label>
+							<label class="item item-input">
+							    <input type="text" placeholder="Lantai" ng-model="addressInput.floor">
+							</label>
+							<label class="item item-input">
+							    <input type="text" placeholder="Nomor" ng-model="addressInput.room_unit">
+							</label>
+						</div>
+						<div ng-switch-when="2">
+							<label class="item item-input">
+							    <input type="text" placeholder="Name Komplek" ng-model="addressInput.address_name">
+							</label>
+						</div>
+						<div ng-switch-when="3">						
+							<label class="item item-input">
+							    <input type="text" placeholder="Nama Apartment" ng-model="addressInput.address_name">
+							</label>
+							<label class="item item-input">
+							    <input type="text" placeholder="Tower" ng-model="addressInput.tower_division" >
+							</label>
+							<label class="item item-input">
+							    <input type="text" placeholder="Lantai" ng-model="addressInput.floor">
+							</label>
+							<label class="item item-input">
+							    <input type="text" placeholder="Nomor" ng-model="addressInput.room_unit">
+							</label>
+						</div>
+						<div ng-switch-when="4">						
+							<label class="item item-input">
+							    <input type="text" placeholder="Nama Hotel" ng-model="addressInput.address_name">
+							</label>
+							<label class="item item-input">
+							    <input type="text" placeholder="Lantai" ng-model="addressInput.floor">
+							</label>
+							<label class="item item-input">
+							    <input type="text" placeholder="Nomor" ng-model="addressInput.room_unit">
+							</label>
+						</div>
+						<div ng-switch-when="5">						
+							<label class="item item-input">
+							    <input type="text" placeholder="Nama Ruko/Rukan" ng-model="addressInput.address_name">
+							</label>
+							<label class="item item-input">
+							    <input type="text" placeholder="Lantai" ng-model="addressInput.floor">
+							</label>
+						</div>
+						<div ng-switch-when="6">						
+							<label class="item item-input">
+							    <input type="text" placeholder="Nama Kost" ng-model="addressInput.address_name">
+							</label>
+							<label class="item item-input">
+							    <input type="text" placeholder="Lantai" ng-model="addressInput.floor">
+							</label>
+							<label class="item item-input">
+							    <input type="text" placeholder="Kamar" ng-model="addressInput.room_unit">
+							</label>
+						</div>
+					</addrType>			
+					<div class="item item-input-inset">
+						<textarea ng-model="addressInput.address_content" placeholder="Full Address"></textarea>
+					</div>
+				</div>
+			</div>
+
+		</ion-content>
+	</ion-modal-view>  	
+</script>

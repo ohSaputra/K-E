@@ -1,0 +1,81 @@
+<ion-view>
+
+<ion-nav-bar class="navbar" align-title="center">
+	<ion-nav-buttons side="left">
+		<button class="button-clear" ng-click="toggleLeft()">
+			<i class="ion-navicon-round icon-header" style="font-size:20px;vertical-align:40%"></i>
+		</button>
+	</ion-nav-buttons>
+
+	<ion-nav-title>
+      <img alt="Brand" src="img/Klik-Eat-Logo-White.png" id="brand" style="height:35px;width:auto;margin-top:3px;"/>
+    </ion-nav-title>
+	<ion-nav-buttons side="right">
+		<button class="button-clear" ng-click="toPromo()">
+			<i class="ion-star icon-header"  style="font-size:20px"></i>
+		</button>
+	</ion-nav-buttons>
+</ion-nav-bar>
+
+<ion-content  style="background-color:#eee;background-size:cover">
+	<div class="banner_home">
+	    Klik-Eat.com Adalah Partner Delivery<br/>Dari Ratusan Restoran Di Jakarta
+	</div>
+	
+	<div class="subh_text">PICK YOUR LOCATION</div>
+
+	<div class="subheader">
+		<form action="search.html" method="get" id="frm_findresto">
+			    <select ng-model="regionList" ng-options="regions.region_name for regions in regionInfos" ng-change="searchLocation(regionList.region_id)"><option value="" disabled selected>Pick a Region</option></select>
+			    <select ng-model="data.locationList" ng-change="toRestaurantList()">
+			    	<option value="" disabled selected>{{chooseOption}}</option>
+					<option ng-value="{{locations.location_id}}" ng-repeat="locations in locationInfos">{{locations.location_name}}</option>
+			    </select>
+		</form>
+	</div>
+
+	<div class="subh_text" style="text-align:center">OR
+	    SEARCH FOR RESTAURANT
+	</div>
+
+	<div class="subheader">
+		<form action="search.html" method="get" id="frm_findresto1">
+			    <input type="text" name="keyword" placeholder="search for restaurant, food">
+			    <input type="hidden" name="action" value="search">
+			    <input type="submit" class="findbtn" value="FIND RESTAURANTS">
+		</form>
+	</div>
+
+	<div class="header_cs">
+		Customer Service 021-2954-5000
+	</div>
+
+    <ion-slide-box style="clear:both" show-pager="true" on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true">
+	  <ion-slide style="text-align:center">
+	    <img src="http://backend.klik-eat.com/inc/images/promo/banner-freed.jpg" style="width:80%;margin-top:20px"/>
+	  </ion-slide>
+	  <ion-slide style="text-align:center">
+	    <img src="http://backend.klik-eat.com/inc/images/promo/banner-papapurin.jpg" style="width:80%;margin-top:20px"/>
+	  </ion-slide>
+	  <ion-slide style="text-align:center">
+	    <img src="http://backend.klik-eat.com/inc/images/promo/banner-sangrai.jpg" style="width:80%;margin-top:20px"/>
+	  </ion-slide>
+	  <ion-slide style="text-align:center">
+	    <img src="http://backend.klik-eat.com/inc/images/promo/banner-ohlala.jpg" style="width:80%;margin-top:20px"/>
+	  </ion-slide>
+	  <ion-slide style="text-align:center">
+	    <img src="http://backend.klik-eat.com/inc/images/promo/banner-jj.jpg" style="width:80%;margin-top:20px"/>
+	  </ion-slide>
+	  <ion-slide style="text-align:center">
+	    <img src="http://backend.klik-eat.com/inc/images/promo/banner-tredici.jpg" style="width:80%;margin-top:20px"/>
+	  </ion-slide>
+	  <ion-slide style="text-align:center">
+	    <img src="http://backend.klik-eat.com/inc/images/promo/banner-stgermain.jpg" style="width:80%;margin-top:20px"/>
+	  </ion-slide>
+	</ion-slide-box>
+
+	<div data-role="footer" style="margin-top:10px;font-size:70%;text-align:center;padding:10px;">
+			Copyright &copy; 2013-2014 Klik-Eat.com. All rights reserved.
+    </div>
+</ion-content>
+</ion-view>

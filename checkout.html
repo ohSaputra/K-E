@@ -1,0 +1,129 @@
+<ion-view>
+
+<ion-nav-bar class="navbar" align-title="center">
+	<ion-nav-back-button class="button-clear">
+		<i class="ion-arrow-left-b" style="color:#fff;font-weight:bold"> Checkout</i> 		
+    </ion-nav-back-button>
+	
+	<ion-nav-buttons side="right">
+		<button class="button-clear" ng-click="toHome()">
+			<i class="ion-home icon-header" style="font-size:20px"></i>
+		</button>
+		<button class="button-clear">
+			<i class="ion-star icon-header" style="font-size:20px"></i>
+		</button>
+	</ion-nav-buttons>
+</ion-nav-bar>
+
+<ion-content style="background-color:#eee">
+
+<table class="table_checkout">
+	<tr>
+		<td colspan=2><div class="sum_steps">1</div>Order Summary
+	<tr>
+		<td>			
+		<td>
+			<ul class="list list-inset summary">
+				<li class="item">Order Amount <span style="float:right">{{totalPrice | currency : "Rp " : 0}}</span></li>
+				<li class="item">Tax & Service Charge <span style="float:right">{{tax_service_charge | currency : "Rp " : 0}}</span></li>
+				<li class="item">Delivery Fee<span style="float:right">{{delivery_fee | currency : "Rp " : 0}}</span></li>
+				<li class="item grand_total">Total Order Amount <span style="float:right">{{totalPrice+tax_service_charge+delivery_fee | currency : "Rp " : 0}}</span></li>
+			</ul>
+	<tr>
+		<td colspan=2><br/><div class="sum_steps">2</div>Delivery Instruction
+	<tr>
+		<td>			
+		<td><div class="list list-inset"><div class="item item-input-inset"><textarea ng-model="deliveryInstruction.data"></textarea></div></div>
+	<tr>
+		<td colspan=2><br/><div class="sum_steps">3</div>Delivery Address
+	<tr>
+		<td>
+		<td><div class="list list-inset">
+			<label class="item  item-select select_size">
+				<select ng-model="data.addressList" class="size_input" ng-change="myHome()">
+				<option value="" disabled selected>Choose your address</option>
+					<option ng-value="{{address.address_id}}" ng-repeat="address in addrs">{{address.address_name}}</option>
+				</select>
+			</label>
+			</div>
+			
+			<div class="card" ng-switch on="addr.address_type">
+					<addrType ng-switch-when="1">
+						<div class="item item-divider">
+							Kantor
+						</div>
+						<div class="item item-text-wrap">
+							{{addr.address_name}} <br/>
+							{{addr.tower_division}} {{addr.floor}} <br/>
+						    {{addr.address_content}}
+							{{addr.room_unit}}							
+						</div>	
+					</addrType>
+					<addrType ng-switch-when="2">
+						<div class="item item-divider">
+							Rumah
+						</div>
+						<div class="item item-text-wrap">
+							{{addr.address_name}}
+						    {{addr.address_content}}						
+						</div>	
+					</addrType>
+					<addrType ng-switch-when="3">
+						<div class="item item-divider">
+							Apartment
+						</div>
+						<div class="item item-text-wrap">
+							{{addr.address_name}} <br/>
+							{{addr.tower_division}} {{addr.floor}} {{addr.room_unit}} <br/>
+						    {{addr.address_content}}															
+						</div>	
+					</addrType>
+					<addrType ng-switch-when="4">
+						<div class="item item-divider">
+							Hotel
+						</div>
+						<div class="item item-text-wrap">
+							{{addr.address_name}}
+						    {{addr.floor}} {{addr.room_unit}} <br/>
+						    {{addr.address_content}}								
+						</div>	
+					</addrType>
+					<addrType ng-switch-when="5">
+						<div class="item item-divider">
+							Ruko/Rukan
+						</div>
+						<div class="item item-text-wrap">
+							{{addr.address_name}}
+						    {{addr.floor}} {{addr.room_unit}} <br/>
+							{{addr.address_content}}					
+						</div>	
+					</addrType>
+					<addrType ng-switch-when="6">
+						<div class="item item-divider">
+							Kost
+						</div>
+						<div class="item item-text-wrap">
+							{{addr.address_name}}
+						    {{addr.floor}} {{addr.room_unit}} <br/>
+							{{addr.address_content}}								
+						</div>	
+					</addrType>
+			</div>
+	<tr>
+		<td colspan=2><br/><div class="sum_steps">4</div>Payment Method
+	<tr>
+		<td>			
+		<td>
+			<div class="card"><div class="item item-text-wrap"><strong>Cash On Delivery</strong></div></div>
+</table>
+
+<div class="padding" ng-hide="searchType == 0">
+	<div class="button-bar "><button class="button button-assertive" ng-click="placeOrder()" ng-disabled="addr.address_id == null">Place Order</button></div>
+</div>
+
+<div class="padding card" ng-show="searchType == 0">
+	Delivery Address is not set.
+</div>
+<br><br><br><br><br><br><br><br>
+</ion-content>
+</ion-view>

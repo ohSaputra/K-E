@@ -1,0 +1,31 @@
+<ion-view>
+
+<ion-nav-bar class="navbar" align-title="center">
+	<ion-nav-buttons side="left">
+		<button class="button-clear" ng-click="toggleLeft()">
+			<i class="ion-navicon-round icon-header" style="font-size:20px;vertical-align:40%"></i>
+			<img alt="Brand" src="img/Klik-Eat-Logo-White.png" id="brand" class="header-logo"/>
+		</button>
+	</ion-nav-buttons>
+
+	<ion-nav-buttons side="right">
+		<button class="button-clear" ng-click="toHome()">
+			<i class="ion-home icon-header" style="font-size:20px"></i>
+		</button>
+		<button class="button-clear">
+			<i class="ion-star icon-header" style="font-size:20px"></i>
+		</button>
+	</ion-nav-buttons>
+</ion-nav-bar>
+
+<ion-content>
+
+<div class="list">
+	<div class="item">{{customer.customer_name}}</div>
+	<div class="item">{{customer.phone}}</div>
+	<div class="item">{{customer.mobile}}</div>
+</div>
+
+</ion-content>
+
+</ion-view>

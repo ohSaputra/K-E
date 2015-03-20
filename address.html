@@ -1,0 +1,71 @@
+<ion-view>
+
+<ion-nav-bar class="navbar" align-title="center">
+	<ion-nav-buttons side="left">
+		<button class="button-clear" ng-click="toggleLeft()">
+			<i class="ion-navicon-round icon-header" style="font-size:20px;vertical-align:40%"></i>
+			<img alt="Brand" src="img/Klik-Eat-Logo-White.png" id="brand" class="header-logo"/>
+		</button>
+	</ion-nav-buttons>
+	
+	<ion-nav-buttons side="right">
+		<a class="button button-clear" href="#/new-address" style="color:#fff;font-size:16px;text-decoration:none;">
+			New
+		</a>
+    </ion-nav-buttons>
+</ion-nav-bar>
+
+<ion-content style="background-color:#eee">
+
+
+<div class="list">
+
+	<div class="item" ng-repeat="item in addresses.address_list" ng-switch on="item.address_type">
+					<addrType ng-switch-when="1">
+						<h2>Kantor</h2>
+						<p>	{{item.address_name}} <br/>
+							{{item.tower_division}} {{item.floor}} <br/>
+						    {{item.address_content}}
+							{{item.room_unit}}							
+						</p>	
+					</addrType>
+					<addrType ng-switch-when="2">
+						<h2>Rumah</h2>
+						<p>	{{item.address_name}}
+						    {{item.address_content}}						
+						</p>	
+					</addrType>
+					<addrType ng-switch-when="3">
+						<h2>Apartment</h2>
+						<p>	{{item.address_name}} <br/>
+							{{item.tower_division}} {{item.floor}} {{item.room_unit}} <br/>
+						    {{item.address_content}}															
+						</p>	
+					</addrType>
+					<addrType ng-switch-when="4">
+						<h2>Hotel</h2>
+						<p>	{{item.address_name}}
+						    {{item.floor}} {{item.room_unit}} <br/>
+						    {{item.address_content}}								
+						</p>	
+					</addrType>
+					<addrType ng-switch-when="5">
+						<h2>Ruko/Rukan</h2>
+						<p> {{item.address_name}}
+						    {{item.floor}} {{item.room_unit}} <br/>
+							{{item.address_content}}					
+						</p>	
+					</addrType>
+					<addrType ng-switch-when="6">
+						<h2>Kost</h2>
+						<p>	{{item.address_name}}
+						    {{item.floor}} {{item.room_unit}} <br/>
+							{{item.address_content}}								
+						</p>	
+					</addrType>
+	</div>
+</div> 
+
+
+</ion-content>
+</ion-view>

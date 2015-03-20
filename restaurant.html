@@ -1,0 +1,112 @@
+<script type="text/ng-template" id="myModalContent.html">
+ <ion-modal-view>
+ 	<form>
+        <ion-header-bar>
+                <div class="menu-title">Food Order</div>
+        </ion-header-bar>
+        <ion-content>
+            <div class="padding"><img class="full-image" ng-if="!menu.menu_image" ng-src="http://placehold.it/320x360" style="width:100%;height:auto"/></div>
+            <div class="padding"><img class="full-image" ng-if="menu.menu_image" ng-src="http://117.102.249.127/inc/upload/{{menu.menu_image}}" style="width:100%;height:auto"/></div>
+            <div class="list">
+            	<div class="padding menu-title">{{menu.menu_name}}</div>
+        	    <div class="padding">{{menu.menu_description}}</div>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Quantity</span>
+                    <input type="text" ng-model="menu.qty" placeholder="Qty" ng-init="menu.qty=1"/>
+                </label>
+                <label class="item item-input">
+        	       <textarea ng-model="menu.instructions" placeholder="Special Instructions"></textarea>
+                </label>
+            </div>
+            <div ng-if="menu.size.length>0" class="list">
+                <label class="item  item-select select_size">
+                    <select ng-model="menu.size_id" name="size_id" class="size_input" required ng-options="sz.size_name for sz in menu.size"></select>
+                </label>       
+            </div>
+
+            <div ng-if="menu.attribute.length>0" class="list">
+                <label class="item item-input"> Available Additions</label>
+                <ion-checkbox ng-repeat="att in menu.attribute" name="attr_id" id="checkbox_{{$index}}" ng-model="att.selected" value="{{att.attribute_id}}" type="checkbox"/>
+                    <span style="font-size:14px">{{att.attribute_name}} {{att.attribute_price | currency : 'Rp ' : 0}}</span>
+                </ion-checkbox>               
+            </div>
+        	
+            <div class="padding-horizontal padding-bottom" style="text-align:center;font-weight:bold;font-size:15px;margin-bottom:10px">Total Price: {{total | currency : 'Rp ' : 0}}</div>
+            <div class="button-bar">
+                <button ng-click="closeModal()" class="button button-calm">Close</button>
+            	<button ng-click="addToCart(menu)" class="button button-balanced">Add To Cart</button>
+            </div>
+         </ion-content>
+    </form>
+</ion-modal-view>
+</script>
+
+<ion-view>
+
+<ion-nav-bar class="navbar" align-title="center">
+	<ion-nav-back-button class="button-clear">
+		<i class="ion-arrow-left-b" style="color:#fff;"> Restaurant</i> 		
+    </ion-nav-back-button>
+	
+	<ion-nav-buttons side="right">
+		<button class="button-clear" ng-click="toHome()">
+			<i class="ion-home icon-header" style="font-size:20px"></i>
+		</button>
+		<button class="button-clear">
+			<i class="ion-star icon-header" style="font-size:20px"></i>
+		</button>
+	</ion-nav-buttons>
+</ion-nav-bar>
+
+<ion-content style="background-color:#eee;">
+
+	<div style="float:left;width:100%;-moz-box-sizing:border-box;box-sizing:border-box;" >
+		<div id="restaurantHeader" style="padding:10px;height:70px;">
+			<div class="restoInfoLeft" style="background-image:url(http://117.102.249.127/inc/upload/{{restoInfos.logo_image}});background-position:center;background-size:cover"></div>
+			<div class="restoInfoRight" id="restaurantName">
+				<p>{{restoInfos.restaurant_firstname}}</p>
+				<p class="restSecondName">@ {{restoInfos.restaurant_lastname}}</p>
+			</div>
+			<div class="restoArea">
+				<strong>Delivery By : </strong><br/>Klik-Eat for Rp. 18,000.-
+			</div>
+			<div class="restoArea">
+				<strong>Delivery Area : </strong><br/>
+				<span ng-repeat="areas in deliveryArea">{{areas.location_name}}<span ng-if="!$last">,</span><span ng-if="$last">.</span> </span>
+			</div>
+			<div class="restoHours">
+				<span style="font-size:15px;color:green">Restaurant Hours : {{restoInfos.time}}</span> <br>
+				Any order Placed outside the hours will be processed as sson as possible.
+			</div>
+			<ion-list>
+			<div ng-repeat="menu in restoMenus">
+	          <ion-item class=""
+	                    ng-click="OpenUp({{menu.menucategory_id}})"
+	                    ng-class="{active: tab == menu.menucategory_id}">
+	              <i class="icon" ng-class="{'ion-plus': tab != menu.menucategory_id, 'ion-minus': tab == menu.menucategory_id}"></i>
+	            &nbsp;
+	            {{menu.category_name}}</ion-item>
+	            <div ng-show="tab == menu.menucategory_id">
+		          <ion-item class="item-accordion" id="restoMenu"
+		                    ng-repeat="item in menu.menu_list">
+		            <a ng-click="openModal(item.menu_id)" style="display:flex">
+		            <div class="item-text-wrap resto-menu">
+		            	{{item.menu_name}}
+		        	</div>
+		        	<div style="font-size:11px;width:25%">
+		            	<span ng-if="item.menu_price">Rp. {{item.menu_price}}</span>
+		            	<span ng-if="!item.menu_price">Rp. {{menu.size[0].size_price}}</span>
+		        	</div>
+		        	</a>
+		          </ion-item>
+	      		</div>
+	        </div>
+			</ion-list>
+			<br><br><br><br><br><br><br>
+		</div>
+	</div>
+</ion-content>
+<div style="position:fixed;bottom:5px;right:5px;width:20%">
+    <cartcontents></cartcontents>
+</div>
+</ion-view>

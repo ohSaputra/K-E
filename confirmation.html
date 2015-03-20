@@ -1,0 +1,34 @@
+<ion-view view-title="Confirmation">
+
+<ion-nav-bar class="navbar" align-title="center">
+	<ion-nav-buttons side="left">
+		<button class="button-clear" ng-click="toggleLeft()">
+			<i class="ion-navicon-round icon-header" style="font-size:20px;vertical-align:40%"></i>
+			<img alt="Brand" src="img/Klik-Eat-Logo-White.png" id="brand" class="header-logo"/>
+		</button>
+	</ion-nav-buttons>
+
+	<ion-nav-buttons side="right">
+		<button class="button-clear" ng-click="toHome()">
+			<i class="ion-home icon-header" style="font-size:20px"></i>
+		</button>
+		<button class="button-clear">
+			<i class="ion-star icon-header" style="font-size:20px"></i>
+		</button>
+	</ion-nav-buttons>
+</ion-nav-bar>
+
+<ion-content style="background-color:#eee">
+
+<div style="text-align:center;font-size:18px;font-weight:bold;margin-top:15px">Thank You for Your Order</div>
+
+<div class="card padding">
+<div style="color:#bc1e2d;font-weight:bold;font-size:16px">Your Order ID : {{order_id}}</div>
+<br/>
+<p>
+Your order detail will be available shortly at <span style="opacity:0.5">{{customer_email}}</span>. You can also check your order history via your account page.
+</p>
+</div>
+
+</ion-content>
+</ion-view>
